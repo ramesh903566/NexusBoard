@@ -181,3 +181,15 @@ body {
   font-weight: 700;
   line-height: 14px;
 }
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
