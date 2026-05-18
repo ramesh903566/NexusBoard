@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexusBoard - Network Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#191c21",
+                        "inverse-primary": "#006c49",
+                        "on-primary-container": "#00422b",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "on-surface": "#e1e2ea",
+                        "primary-container": "#10b981",
+                        "inverse-on-surface": "#2d3036",
+                        "glow-emerald": "rgba(16, 185, 129, 0.15)",
+                        "glow-violet": "rgba(139, 92, 246, 0.15)",
+                        "inverse-surface": "#e1e2ea",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-background": "#e1e2ea",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "surface-tint": "#4edea3",
+                        "on-primary": "#003824",
+                        "surface-container-highest": "#32353b",
+                        "surface-variant": "#32353b",
+                        "on-secondary": "#3c0091",
+                        "tertiary-fixed": "#e1e0ff",
+                        "surface": "#101319",
+                        "outline": "#86948a",
+                        "surface-bright": "#36393f",
+                        "surface-container-lowest": "#0b0e13",
+                        "on-error": "#690005",
+                        "secondary-container": "#571bc1",
+                        "on-tertiary-fixed": "#07006c",
+                        "primary": "#4edea3",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "tertiary": "#c0c1ff",
+                        "surface-container": "#1d2025",
+                        "error-container": "#93000a",
+                        "stroke-glass": "rgba(255, 255, 255, 0.06)",
+                        "surface-container-high": "#272a30",
+                        "on-surface-variant": "#bbcabf",
+                        "tertiary-container": "#9699ff",
+                        "secondary": "#d0bcff",
+                        "surface-card": "#0E131F",
+                        "on-tertiary": "#1000a9",
+                        "on-secondary-fixed": "#23005c",
+                        "primary-fixed": "#6ffbbe",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#c4abff",
+                        "primary-fixed-dim": "#4edea3",
+                        "background": "#101319",
+                        "outline-variant": "#3c4a42",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#e9ddff",
+                        "on-primary-fixed": "#002113",
+                        "on-tertiary-container": "#1d17b2",
+                        "surface-dim": "#101319"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "bento-gap": "24px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "grid-unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["11px", { "lineHeight": "14px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased h-screen w-full overflow-hidden flex selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Navigation Drawer (Desktop) -->
+<nav class="hidden md:flex flex-col h-full w-80 rounded-r-lg border-r border-stroke-glass shadow-2xl bg-surface-container-low dark:bg-surface-container-low py-8 gap-grid-unit z-50 flex-shrink-0">
+<!-- Header Profile -->
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-2 border-stroke-glass overflow-hidden shrink-0 relative bg-surface-container">
+<img alt="Executive User Profile" class="w-full h-full object-cover" data-alt="A close up studio portrait of a corporate executive in a modern high tech environment. Dark, cinematic lighting with a subtle blue rim light. The overall mood is serious and professional, fitting a high-performance cyber-minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy-sVPLFrfZRiuzHc_rSkcjsIeyo_hgeq3FkJH-gPRu8Cp0yon71J_Kkwv4kdXtOh3rIZjGcv_RW0lrM8Dpdp0998EgtNXQB1We8GneEeFSmAeh1_Des6FEJ3NLTpRbLKZVEnkR3XAQ-z3rNX9f6LIyxpdXJ9LYFtUdmxWI16g3wFJ0FpHp8uSF41TTLuykpllrfoyjugoIAiF-gZRuchYcP3aQnXeSsOlO7fa4Sw3GpPJqVbsVt5fjwJrO8Qfzbb_i5vqWZyYD9A"/>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="font-body-md text-body-md text-primary dark:text-primary truncate">Nexus Executive</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant truncate">Tier 1 Access</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-1 opacity-70">Node: 0x882</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col gap-2 px-2 font-body-md text-body-md">
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-surface-variant/30 hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">analytics</span>
+                Executive Dashboard
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-surface-variant/30 hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">auto_awesome</span>
+                Productivity Module
+            </a>
+<a class="flex items-center gap-4 text-primary bg-glow-emerald border-l-2 border-primary px-4 py-3 rounded-lg hover:bg-surface-variant/30 hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors fill">account_tree</span>
+                Network Hub
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-surface-variant/30 hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">tune</span>
+                Customization
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 bg-background dark:bg-background border-b border-stroke-glass bg-background/80 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] docked full-width top-0 z-40 sticky">
+<div class="flex items-center gap-3 group cursor-pointer hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary dark:text-primary text-[28px]">emergency</span>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">NexusBoard</h1>
+</div>
+<!-- Top Nav Context Actions -->
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full border border-stroke-glass flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 bg-surface-card shadow-sm">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop pb-32 md:pb-margin-desktop">
+<!-- Page Header -->
+<div class="mb-8">
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-2">Team Workspace</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Manage collaborative nodes, track real-time connections, and oversee network topography across deployed modules.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-4 md:grid-cols-12 gap-bento-gap auto-rows-min">
+<!-- Hero Node-Link Visualizer -->
+<div class="col-span-4 md:col-span-8 lg:col-span-9 bg-surface-card rounded-[24px] border border-stroke-glass p-8 relative overflow-hidden flex flex-col shadow-[0_8px_32px_rgba(0,0,0,0.4)] min-h-[400px]">
+<!-- Ambient Inner Glow -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-glow-violet rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div>
+<span class="font-label-mono text-label-mono text-secondary tracking-widest uppercase mb-1 block opacity-80">Live Topography</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Active Cluster</h3>
+</div>
+<span class="px-3 py-1 bg-secondary-container/20 text-secondary-fixed border border-secondary-container/30 rounded-full font-label-mono text-label-caps flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed shadow-[0_0_8px_rgba(208,188,255,0.8)] animate-pulse"></span>
+                            Syncing
+                        </span>
+</div>
+<!-- Network Canvas Area -->
+<div class="flex-1 relative w-full h-full min-h-[300px] rounded-xl border border-stroke-glass bg-background/50 overflow-hidden group">
+<!-- SVG Connecting Lines -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
+<!-- Center to Top Left -->
+<path class="group-hover:stroke-[rgba(139,92,246,0.6)] transition-all duration-700" d="M 50% 50% L 20% 30%" stroke="rgba(139, 92, 246, 0.3)" stroke-dasharray="4 4" stroke-width="2"></path>
+<!-- Center to Top Right -->
+<path class="group-hover:stroke-[rgba(139,92,246,0.8)] transition-all duration-700" d="M 50% 50% L 80% 25%" stroke="rgba(139, 92, 246, 0.4)" stroke-width="2"></path>
+<!-- Center to Bottom Right -->
+<path class="group-hover:stroke-[rgba(139,92,246,0.5)] transition-all duration-700" d="M 50% 50% L 75% 75%" stroke="rgba(139, 92, 246, 0.2)" stroke-width="1"></path>
+<!-- Center to Bottom Left -->
+<path class="group-hover:stroke-[rgba(139,92,246,1)] transition-all duration-700" d="M 50% 50% L 25% 80%" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2"></path>
+</svg>
+<!-- Central Node -->
+<div class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform">
+<div class="w-16 h-16 rounded-full border-2 border-secondary bg-surface shadow-[0_0_30px_rgba(139,92,246,0.4)] flex items-center justify-center p-1">
+<img alt="Central Node Avatar" class="w-full h-full rounded-full object-cover" data-alt="A portrait of a male professional in a modern office. The image has a cool, slightly desaturated cyber-minimalist tone. High contrast lighting with subtle violet hues in the shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5nmqJz7PFl-EL4we83c2ecSvfc6dPsNUKmsJi31P79ILNRE0g--lvhNF8hYJLV233D78gE4u5tU8-ZYaCVCXU9eOMnCfn6fBj5iQspVkLLnXx_p-9hZihteq83T_IruFuk_oLnDRx1mS1kAl8GnqRh4dkNapIyQg1eiGhxH--SRX4OTx1tBsVrT_V4xBIbVt1dg-hO8MAPiPXcaoNSKS5oRCLaRXXf2zaqQmxAIEx2L0g6E97Uads7qVj15GL04qccoErsZnONRk"/>
+</div>
+<span class="mt-2 font-label-caps text-label-caps text-secondary-fixed bg-background/80 backdrop-blur-sm px-2 py-1 rounded">CORE_HUB</span>
+</div>
+<!-- Satellite Nodes -->
+<div class="absolute top-[30%] left-[20%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform opacity-80 hover:opacity-100">
+<div class="w-10 h-10 rounded-full border border-stroke-glass bg-surface overflow-hidden">
+<img alt="Node Avatar" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" data-alt="A portrait of a female engineer. Cyberpunk aesthetic with dark background and faint neon lighting. Professional and focused mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYFumjvIGNr-r8dUPqiwWsexIufRNtAdp2XxCGkJjK7kkRm164-lv9ErdUnfy9Ez2zPGJwVp-clrm5W0jbPuTfF04uzkp-U2CdRvXHu386-S2Bdp-eWMHPJJNUKd-iedNPiBfe23V5vu8Dr-jtF4vTs1t5-CS1tFLieXeFmXeW9iZRiTK8Ocw75pgObUVNGHTbid8O0Ij0h4J9ItOXZvun8nFqHir87J0T8n1XZKtJlzSJItDDip7r9ju693a5X8ENLeH49l7M5eg"/>
+</div>
+</div>
+<div class="absolute top-[25%] left-[80%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform opacity-90 hover:opacity-100">
+<div class="w-12 h-12 rounded-full border border-secondary/50 bg-surface overflow-hidden shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+<img alt="Node Avatar" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" data-alt="A portrait of a tech worker wearing glasses in a laboratory setting. Clean, high-tech styling. Deep shadows with crisp white highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx5-Yt8G_dyyYjEogpvj7hH2FMWYNgv0Tu-9nnQ9j3v549ZCJK47QdFnuO-xXDsMI1DobfLC59MpEg0jZREX9lwaHOqUqoYtZrcK8xRAL_H55xVGIUjpiGCreTrum5A9QzHpmUZHzOGtJVmSWpixcCl1V3OWAaoSRR9wlnJY50rjeKYcU0E2Z9RD8WiF6X2WMfxlBlTThK_QI-CBUcCOl09pU6GXS03qEaFbGsp2Vpe4P9jJClJ0FUMNlJVHdn23pSc9Izk3O9YDU"/>
+</div>
+</div>
+<div class="absolute top-[75%] left-[75%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform opacity-60 hover:opacity-100">
+<div class="w-8 h-8 rounded-full border border-stroke-glass bg-surface flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">device_hub</span>
+</div>
+</div>
+<div class="absolute top-[80%] left-[25%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform">
+<div class="w-14 h-14 rounded-full border-2 border-secondary bg-surface overflow-hidden shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+<img alt="Node Avatar" class="w-full h-full object-cover" data-alt="A portrait of a young professional. The lighting is cinematic and moody, fitting a dark mode digital interface. Soft focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMftzi2Va0BYWV8VeyKRDJVRdE5hHIl9Gyzw4f8qtA46mBDgTK-EbV78Bhjzxt-Ih1Q48Y6rBkFCEnfK64qNueOE7j_SG3TR6jpntvKSenYlS7rGyKT59KhKh02rU9bS83tT44trZwMPiWz5ARkyznkf7jGhQOfN7H4IEGsoiW6ERFuNBPB6k0fz5C657pB12sOkmPu4TnOohpDwmk1LCHFhh770B5ZnR5RRhqMHpLCTK0055gkSB8LdWPxT_Ul6OJnTKXT_NGYDk"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Projects List -->
+<div class="col-span-4 md:col-span-4 lg:col-span-3 flex flex-col gap-bento-gap">
+<div class="bg-surface-card rounded-[24px] border border-stroke-glass p-8 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex-1">
+<span class="font-label-mono text-label-mono text-on-surface-variant tracking-widest uppercase mb-4 block">Project Nodes</span>
+<div class="space-y-4">
+<!-- List Item 1 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-background/40 border border-stroke-glass hover:bg-background/80 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-secondary-fixed shadow-[0_0_8px_rgba(208,188,255,0.6)]"></div>
+<div>
+<h4 class="font-body-md text-body-md text-on-surface">Alpha Sector</h4>
+<p class="font-label-caps text-label-caps text-on-surface-variant">3 Active Links</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">chevron_right</span>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-background/40 border border-stroke-glass hover:bg-background/80 transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(78,222,163,0.6)]"></div>
+<div>
+<h4 class="font-body-md text-body-md text-on-surface">Beta Core</h4>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Stable</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- List Item 3 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-background/40 border border-stroke-glass hover:bg-background/80 transition-colors cursor-pointer group opacity-60">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<div>
+<h4 class="font-body-md text-body-md text-on-surface">Gamma Proxy</h4>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Offline</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Quick Action Button -->
+<button class="w-full p-4 rounded-xl bg-secondary-container hover:bg-secondary-container/90 text-on-secondary-container font-body-md text-body-md font-semibold transition-all shadow-[0_4px_16px_rgba(87,27,193,0.3)] flex items-center justify-center gap-2 border border-secondary/20 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+<span class="material-symbols-outlined">add_link</span>
+                        Initialize Node
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-lg border-t border-stroke-glass bg-surface-container/90 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="flex justify-around items-center px-6 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:bg-surface-variant/50 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-on-surface">dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:bg-surface-variant/50 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-on-surface">insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-glow-emerald rounded-full p-3 Active: scale-90 duration-150 relative shadow-[0_0_15px_rgba(16,185,129,0.2)]" href="#">
+<span class="material-symbols-outlined text-[24px] fill">hub</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:bg-surface-variant/50 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-on-surface">settings_suggest</span>
+</a>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexusBoard</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#191c21",
+                        "inverse-primary": "#006c49",
+                        "on-primary-container": "#00422b",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "on-surface": "#e1e2ea",
+                        "primary-container": "#10b981",
+                        "inverse-on-surface": "#2d3036",
+                        "glow-emerald": "rgba(16, 185, 129, 0.15)",
+                        "glow-violet": "rgba(139, 92, 246, 0.15)",
+                        "inverse-surface": "#e1e2ea",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-background": "#e1e2ea",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "surface-tint": "#4edea3",
+                        "on-primary": "#003824",
+                        "surface-container-highest": "#32353b",
+                        "surface-variant": "#32353b",
+                        "on-secondary": "#3c0091",
+                        "tertiary-fixed": "#e1e0ff",
+                        "surface": "#101319",
+                        "outline": "#86948a",
+                        "surface-bright": "#36393f",
+                        "surface-container-lowest": "#0b0e13",
+                        "on-error": "#690005",
+                        "secondary-container": "#571bc1",
+                        "on-tertiary-fixed": "#07006c",
+                        "primary": "#4edea3",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "tertiary": "#c0c1ff",
+                        "surface-container": "#1d2025",
+                        "error-container": "#93000a",
+                        "stroke-glass": "rgba(255, 255, 255, 0.06)",
+                        "surface-container-high": "#272a30",
+                        "on-surface-variant": "#bbcabf",
+                        "tertiary-container": "#9699ff",
+                        "secondary": "#d0bcff",
+                        "surface-card": "#0E131F",
+                        "on-tertiary": "#1000a9",
+                        "on-secondary-fixed": "#23005c",
+                        "primary-fixed": "#6ffbbe",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#c4abff",
+                        "primary-fixed-dim": "#4edea3",
+                        "background": "#101319",
+                        "outline-variant": "#3c4a42",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#e9ddff",
+                        "on-primary-fixed": "#002113",
+                        "on-tertiary-container": "#1d17b2",
+                        "surface-dim": "#101319"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "bento-gap": "24px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "grid-unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["11px", { "lineHeight": "14px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #101319;
+            color: #e1e2ea;
+        }
+        .bento-card {
+            background-color: #0E131F;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            padding: 32px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen bg-background text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- NavigationDrawer (Desktop) -->
+<nav class="hidden md:flex flex-col h-screen w-80 rounded-r-lg border-r border-stroke-glass shadow-2xl bg-surface-container-low py-8 gap-grid-unit sticky top-0 shrink-0 z-50">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant overflow-hidden border border-stroke-glass flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-2xl">person</span>
+</div>
+<div>
+<h2 class="font-body-md text-body-md font-semibold text-on-surface">Nexus Executive</h2>
+<p class="font-label-mono text-label-mono text-primary mt-1">Node: 0x882</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 px-4">
+<a class="flex items-center gap-4 text-primary bg-glow-emerald border-l-2 border-primary px-4 py-3 rounded-r-lg font-body-md text-body-md transition-transform translate-x-1" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Executive Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-variant/30 hover:text-on-surface transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span>Productivity Module</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-variant/30 hover:text-on-surface transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span>Network Hub</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-variant/30 hover:text-on-surface transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span>Customization</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-h-screen relative pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 border-b border-stroke-glass bg-background/80 backdrop-blur-md sticky top-0 z-40 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">emergency</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">NexusBoard</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full border border-stroke-glass flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Canvas (Bento Grid) -->
+<div class="p-margin-mobile md:p-margin-desktop w-full max-w-7xl mx-auto flex-1">
+<div class="grid grid-cols-4 md:grid-cols-12 gap-bento-gap auto-rows-min">
+<!-- Top Section: Core Metric -->
+<div class="col-span-4 md:col-span-12 bento-card flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-glow-violet rounded-full blur-[80px] pointer-events-none"></div>
+<div class="relative z-10">
+<h3 class="font-label-mono text-label-mono text-primary mb-4 uppercase tracking-widest">Core Diagnostic</h3>
+<div class="flex items-baseline gap-4">
+<h1 class="font-headline-xl text-headline-xl text-on-surface">88%</h1>
+<span class="font-headline-md text-headline-md text-on-surface-variant font-normal">Efficiency</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-md">System output remains optimal. Resource allocation algorithms are operating within projected parameters.</p>
+</div>
+<div class="relative z-10 w-full md:w-auto flex items-center gap-4 bg-surface-container-low border border-stroke-glass rounded-full px-6 py-3">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+<span class="font-label-mono text-label-mono text-on-surface">+4.2% Optimization</span>
+</div>
+</div>
+<!-- Middle Left: Productivity AI -->
+<div class="col-span-4 md:col-span-8 bento-card min-h-[320px]">
+<div class="absolute -top-20 -right-20 w-80 h-80 bg-glow-emerald rounded-full blur-[64px] pointer-events-none"></div>
+<div class="relative z-10 h-full flex flex-col">
+<div class="flex justify-between items-start mb-auto">
+<h3 class="font-label-mono text-label-mono text-primary uppercase tracking-widest">Module</h3>
+<span class="material-symbols-outlined text-on-surface-variant">auto_awesome</span>
+</div>
+<div class="mt-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Productivity ai</h2>
+<h4 class="font-headline-md text-headline-md text-on-surface-variant font-normal">SmartSolution Active</h4>
+</div>
+<div class="mt-8 flex gap-3">
+<button class="bg-primary/10 border border-primary text-primary px-6 py-2 rounded-full font-label-mono text-label-mono hover:bg-primary/20 transition-colors">Configure</button>
+<button class="bg-surface-variant/50 border border-stroke-glass text-on-surface px-6 py-2 rounded-full font-label-mono text-label-mono hover:bg-surface-variant transition-colors">Logs</button>
+</div>
+</div>
+</div>
+<!-- Middle Right: Avatar Network Preview -->
+<div class="col-span-4 md:col-span-4 bento-card min-h-[320px] flex flex-col">
+<h3 class="font-label-mono text-label-mono text-primary uppercase tracking-widest mb-8 relative z-10">Network Hub</h3>
+<div class="relative flex-1 flex items-center justify-center">
+<div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+<!-- Abstract connecting lines pattern -->
+<svg height="100%" viewbox="0 0 200 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 100 L150 50 M50 100 L150 150 M150 50 L150 150" fill="none" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1"></path>
+</svg>
+</div>
+<div class="relative w-full h-full">
+<div class="absolute top-1/2 left-4 -translate-y-1/2 w-12 h-12 rounded-full border-2 border-primary bg-surface-container-high flex items-center justify-center z-20 shadow-[0_0_15px_rgba(78,222,163,0.3)]">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
+<div class="absolute top-4 right-8 w-10 h-10 rounded-full border border-stroke-glass bg-surface-container flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+</div>
+<div class="absolute bottom-4 right-8 w-10 h-10 rounded-full border border-stroke-glass bg-surface-container flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center text-on-surface-variant text-sm relative z-10">
+<span class="font-label-mono text-label-mono">3 Active Nodes</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<!-- Bottom Section: Hardware Integration Deck -->
+<div class="col-span-4 md:col-span-12 bento-card">
+<div class="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-16">
+<div class="shrink-0 relative">
+<div class="absolute inset-0 bg-primary opacity-10 blur-2xl rounded-full"></div>
+<img alt="NexusBoard Asterisk Logo" class="w-16 h-16 relative z-10" src="data:image/png;base64,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"/>
+</div>
+<div class="flex-1 relative h-24 hidden md:block w-full">
+<!-- Glowing Trace Lines connecting logo to icons -->
+<div class="absolute top-1/2 left-0 w-full h-px bg-stroke-glass -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-0 w-1/2 h-px bg-gradient-to-r from-primary to-transparent -translate-y-1/2 opacity-50 shadow-[0_0_8px_rgba(78,222,163,0.8)]"></div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none">
+<path d="M0,48 C100,48 150,12 250,12" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"></path>
+<path d="M0,48 C100,48 150,84 250,84" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"></path>
+<!-- Animated/Glowing paths overlay -->
+<path class="opacity-50" d="M0,48 C100,48 150,12 250,12" fill="none" stroke="#571bc1" stroke-dasharray="4 4" stroke-width="1"></path>
+<path class="opacity-50" d="M0,48 C100,48 150,84 250,84" fill="none" stroke="#4edea3" stroke-dasharray="4 4" stroke-width="1"></path>
+</svg>
+</div>
+<div class="flex gap-6 shrink-0 relative z-10 w-full md:w-auto justify-between md:justify-end">
+<div class="flex flex-col items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-[#5865F2]/10 border border-[#5865F2]/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#5865F2]">forum</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Discord</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-[#E01E5A]/10 border border-[#E01E5A]/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#E01E5A]">tag</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Slack</span>
+</div>
+</div>
+</div>
+<div class="mt-8 border-t border-stroke-glass pt-6 flex justify-between items-center">
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface">Hardware Integration</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Telemetry stream established.</p>
+</div>
+<span class="px-3 py-1 bg-primary-container/10 text-primary font-label-mono text-label-mono rounded-full border border-primary/20">Synced</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-6 pb-6 pt-3 bg-surface-container/90 backdrop-blur-xl border-t border-stroke-glass shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-50 rounded-t-lg">
+<button class="flex flex-col items-center justify-center text-primary bg-glow-emerald rounded-full p-3 transition-transform duration-150 scale-90">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:bg-surface-variant/50 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined mb-1">insights</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:bg-surface-variant/50 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined mb-1">hub</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:bg-surface-variant/50 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined mb-1">settings_suggest</span>
+</button>
+</nav>
+</body></html>
