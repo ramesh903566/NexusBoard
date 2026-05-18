@@ -26,6 +26,14 @@ class BaseIntegrationAdapter(ABC):
         Return raw payloads to be normalized.
         """
         pass
+        
+    @abstractmethod
+    async def fetch_public_analytics(self, platform_user_id: str) -> Dict[str, Any]:
+        """
+        Guarantees that only public, non-sensitive data vectors 
+        are requested from the external platform graph. Minimum OAuth scopes used.
+        """
+        pass
 
     @abstractmethod
     async def normalize_payload(self, raw_data: Dict[str, Any]) -> Dict[str, Any]:

@@ -11,7 +11,6 @@ class IntegrationPlatform(str, enum.Enum):
     linkedin = "linkedin"
     instagram = "instagram"
     twitter = "twitter"
-    naukri = "naukri"
     manual = "manual"
 
 class MetricCategory(str, enum.Enum):
