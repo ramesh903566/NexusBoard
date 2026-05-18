@@ -64,6 +64,17 @@
   --spacing-bento-gap: 24px;
   --spacing-margin-mobile: 16px;
   --spacing-margin-desktop: 40px;
+  /* --- Terminal Theme Colors --- */
+  --color-terminal-void: #030508;
+  --color-terminal-surface: #0A0D14;
+  --color-terminal-orange: #FF4C00;
+  --color-terminal-amber: #FF8C00;
+  --color-terminal-slate: #8A93A6;
+  --color-terminal-glass: rgba(255, 255, 255, 0.03);
+  --color-terminal-stroke: rgba(255, 255, 255, 0.05);
+
+  --shadow-orange-glow: 0 0 25px rgba(255, 76, 0, 0.35);
+  --shadow-soft-glow: 0 0 15px rgba(255, 255, 255, 0.02);
 }
 
 /* ===== Base Styles ===== */
@@ -72,16 +83,38 @@ html {
 }
 
 body {
-  /* Rich luxury twilight gradient, simulating a high-end abstract ocean sunset */
-  background: radial-gradient(circle at 50% 0%, #302b3f 0%, #171822 40%, #0d0f14 100%);
-  background-attachment: fixed;
-  color: var(--color-on-surface);
+  background-color: var(--color-terminal-void);
+  color: #ffffff;
   font-family: var(--font-sans);
+  font-feature-settings: "ss01" on, "ss02" on, "cv01" on;
 }
 
 ::selection {
-  background-color: var(--color-primary-container);
-  color: var(--color-on-primary-container);
+  background-color: var(--color-terminal-orange);
+  color: var(--color-terminal-void);
+}
+
+/* The distinct angular cut design seen on the primary CTA */
+.tech-button-cut {
+  clip-path: polygon(4px 0%, 100% 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0% 100%, 0% 4px);
+}
+
+/* Thin terminal panel borders */
+.hud-border {
+  border: 1px solid var(--color-terminal-stroke);
+  background-color: var(--color-terminal-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Micro status blinking lights */
+.ticker-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-terminal-orange);
+  box-shadow: 0 0 8px #FF4C00;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 /* ===== Scrollbar ===== */

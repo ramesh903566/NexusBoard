@@ -10,9 +10,8 @@ export function middleware(request: NextRequest) {
     if (token) {
       return NextResponse.redirect(new URL('/dashboard/overview', request.url));
     }
-    // Note: If no token, we'd normally render the landing page. 
-    // For now, redirect to /auth since there's no marketing page built yet.
-    return NextResponse.redirect(new URL('/auth', request.url));
+    // If no token, render the landing page.
+    return NextResponse.next();
   }
 
   // 2. Protected Sub-Tree Guards
