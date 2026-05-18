@@ -1,28 +1,54 @@
 from fastapi import APIRouter
 from datetime import datetime, timezone
+import asyncio
 
 router = APIRouter()
 
-@router.get("/unified")
-async def get_unified_dashboard():
+@router.get("/overview")
+async def get_overview_data():
     """
-    Computes aggregate cross-domain metric vectors to render the main dashboard interface.
-    (Currently returning mock data matching TDR section 12.2)
+    Returns the Unified Score Matrix data for the Overview dashboard.
     """
+    await asyncio.sleep(1) # Simulate DB latency
     return {
-        "status": "success",
-        "calculated_at": datetime.now(timezone.utc).isoformat(),
-        "metrics": {
-            "unified_growth_score": 76.2,
-            "historical_trends": {
-                "weekly_delta": 4.1,
-                "monthly_delta": 12.8
-            },
-            "pillars": {
-                "developer_intelligence": { "score": 88.0, "primary_metric": "42 commits" },
-                "productivity": { "score": 65.0, "primary_metric": "6.5 hours focus" },
-                "social_analytics": { "score": 72.4, "primary_metric": "+1.2k followers" },
-                "career_analytics": { "score": 79.4, "primary_metric": "14 recruiter views" }
-            }
-        }
+        "score": 84.2,
+        "chartData": [
+            { "subject": 'Coding', "A": 88, "fullMark": 100 },
+            { "subject": 'Productivity', "A": 92, "fullMark": 100 },
+            { "subject": 'Social', "A": 65, "fullMark": 100 },
+            { "subject": 'Career', "A": 78, "fullMark": 100 },
+        ],
+        "status": "synced"
     }
+
+@router.get("/productivity")
+async def get_productivity_metrics():
+    """
+    Returns the Time-Series data for the Productivity deep work chart.
+    """
+    await asyncio.sleep(1)
+    return [
+        { "date": "May 1", "hours": 4.5 },
+        { "date": "May 2", "hours": 6.2 },
+        { "date": "May 3", "hours": 5.8 },
+        { "date": "May 4", "hours": 7.1 },
+        { "date": "May 5", "hours": 3.5 },
+        { "date": "May 6", "hours": 8.4 },
+        { "date": "May 7", "hours": 6.9 },
+    ]
+
+@router.get("/network")
+async def get_network_metrics():
+    """
+    Returns the Dual-Axis data for the Network Hub audience growth chart.
+    """
+    await asyncio.sleep(1)
+    return [
+        { "date": "May 1", "followers": 5120, "impressions": 840 },
+        { "date": "May 2", "followers": 5135, "impressions": 920 },
+        { "date": "May 3", "followers": 5140, "impressions": 780 },
+        { "date": "May 4", "followers": 5180, "impressions": 1200 },
+        { "date": "May 5", "followers": 5195, "impressions": 1450 },
+        { "date": "May 6", "followers": 5200, "impressions": 1100 },
+        { "date": "May 7", "followers": 5212, "impressions": 1050 },
+    ]

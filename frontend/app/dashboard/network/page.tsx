@@ -5,16 +5,18 @@ import { NetworkGrowthChart } from "@/components/charts/NetworkGrowthChart";
 
 // Simulate network delay for the server component fetch
 async function fetchNetworkMetrics() {
-  await new Promise(resolve => setTimeout(resolve, 2500));
-  return [
-    { date: "May 1", followers: 5120, impressions: 840 },
-    { date: "May 2", followers: 5135, impressions: 920 },
-    { date: "May 3", followers: 5140, impressions: 780 },
-    { date: "May 4", followers: 5180, impressions: 1200 },
-    { date: "May 5", followers: 5195, impressions: 1450 },
-    { date: "May 6", followers: 5200, impressions: 1100 },
-    { date: "May 7", followers: 5212, impressions: 1050 },
-  ];
+  const res = await fetch("http://127.0.0.1:8000/api/v1/dashboard/network", {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  
+  if (!res.ok) {
+    throw new Error(`Failed to fetch network metrics: ${res.status}`);
+  }
+  
+  return res.json();
 }
 
 async function NetworkMetrics() {

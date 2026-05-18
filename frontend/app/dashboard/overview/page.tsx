@@ -4,18 +4,19 @@ import { SyncBadge } from "@/components/SyncBadge";
 import { RadarScoreChart } from "@/components/charts/RadarScoreChart";
 
 async function fetchOverviewData() {
-  await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate delay
+  const res = await fetch("http://127.0.0.1:8000/api/v1/dashboard/overview", {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
   
-  return {
-    score: 84.2,
-    chartData: [
-      { subject: 'Coding', A: 88, fullMark: 100 },
-      { subject: 'Productivity', A: 92, fullMark: 100 },
-      { subject: 'Social', A: 65, fullMark: 100 },
-      { subject: 'Career', A: 78, fullMark: 100 },
-    ],
-    status: 'synced' as const
-  };
+  if (!res.ok) {
+    // In production, we'd handle this more gracefully
+    throw new Error(`Failed to fetch overview data: ${res.status}`);
+  }
+  
+  return res.json();
 }
 
 async function UnifiedScoreMatrix() {

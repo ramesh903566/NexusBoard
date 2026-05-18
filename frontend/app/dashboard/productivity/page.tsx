@@ -5,16 +5,18 @@ import { ProductivityChart } from "@/components/charts/ProductivityChart";
 
 // Simulate network delay for the server component fetch
 async function fetchProductivityMetrics() {
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  return [
-    { date: "May 1", hours: 4.5 },
-    { date: "May 2", hours: 6.2 },
-    { date: "May 3", hours: 5.8 },
-    { date: "May 4", hours: 7.1 },
-    { date: "May 5", hours: 3.5 },
-    { date: "May 6", hours: 8.4 },
-    { date: "May 7", hours: 6.9 },
-  ];
+  const res = await fetch("http://127.0.0.1:8000/api/v1/dashboard/productivity", {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  
+  if (!res.ok) {
+    throw new Error(`Failed to fetch productivity metrics: ${res.status}`);
+  }
+  
+  return res.json();
 }
 
 async function ProductivityMetrics() {
