@@ -1,24 +1,23 @@
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi import Depends, HTTPException, status, Request
 import jwt
-from typing import Optional
 
 from app.core.security import SECRET_KEY, ALGORITHM, TokenPayload
 
-# Standard OAuth2 scheme, expecting a token at the Authorization header
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
-
-async def get_current_user_token(token: str = Depends(oauth2_scheme)) -> TokenPayload:
+async def get_current_user_token(request: Request) -> TokenPayload:
     """
-    Validates the JWT token and returns the payload.
+    Validates the JWT token from the HttpOnly cookie and returns the payload.
     Raises 401 if invalid or expired.
     """
+    token = request.cookies.get("nexus_session")
+    
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
     )
     
+    if not token:
+        raise credentials_exception
+        
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         token_data = TokenPayload(**payload)
@@ -31,7 +30,6 @@ async def get_current_user_token(token: str = Depends(oauth2_scheme)) -> TokenPa
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token has expired",
-            headers={"WWW-Authenticate": "Bearer"},
         )
     except jwt.InvalidTokenError:
         raise credentials_exception

@@ -28,7 +28,7 @@ export default function AuthPage() {
       }
 
       const data = await res.json();
-      login(data.access_token, data.is_new_user);
+      login(data.is_new_user);
     } catch (error) {
       console.error("Authentication error:", error);
       alert("Authentication failed.");

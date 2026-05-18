@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Response
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import Any
 import uuid
@@ -10,18 +10,15 @@ router = APIRouter()
 
 @router.post("/login")
 async def login_access_token(
+    response: Response,
     form_data: OAuth2PasswordRequestForm = Depends()
 ) -> Any:
     """
-    OAuth2 compatible token login, get an access token for future requests.
-    For Phase 2, this is mocked to always succeed and return a token for testing.
-    In real usage, we'd query SQLAlchemy for the user by email (form_data.username).
+    OAuth2 compatible token login. Drops an HttpOnly, Secure JWT cookie.
     """
-    # MOCK DB VALIDATION:
     if form_data.username == "error":
         raise HTTPException(status_code=400, detail="Incorrect email or password")
     
-    # Generate a dummy user ID for now
     user_id = str(uuid.uuid4())
     
     access_token = create_access_token(
@@ -29,8 +26,39 @@ async def login_access_token(
         role=UserRole.standard_user.value
     )
     
+    is_new_user = form_data.username == "newuser"
+    
+    # Set the JWT as an HttpOnly, Secure cookie
+    response.set_cookie(
+        key="nexus_session",
+        value=access_token,
+        httponly=True,
+        secure=True,     # In production, requires HTTPS
+        samesite="lax",
+        max_age=60 * 60 * 24 * 7 # 7 days
+    )
+    
+    # Optional metadata cookie for the frontend (not HttpOnly)
+    response.set_cookie(
+        key="is_new_user",
+        value="true" if is_new_user else "false",
+        httponly=False,
+        secure=True,
+        samesite="lax",
+        max_age=60 * 60 * 24 * 7
+    )
+    
+    response.set_cookie(
+        key="auth_status",
+        value="authenticated",
+        httponly=False,
+        secure=True,
+        samesite="lax",
+        max_age=60 * 60 * 24 * 7
+    )
+    
     return {
-        "access_token": access_token,
-        "token_type": "bearer",
-        "is_new_user": form_data.username == "newuser" # Simulate new user flag
+        "status": "success",
+        "message": "Authenticated successfully",
+        "is_new_user": is_new_user
     }
