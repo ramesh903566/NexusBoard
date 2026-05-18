@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import { NavigationDrawer } from "@/components/NavigationDrawer";
 import { TopAppBar } from "@/components/TopAppBar";
 import { BottomNavBar } from "@/components/BottomNavBar";
+import AuthProvider from "@/components/AuthProvider";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -40,19 +41,21 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-on-surface font-sans antialiased h-screen overflow-hidden flex">
-        {/* Desktop Sidebar */}
-        <NavigationDrawer />
+        <AuthProvider>
+          {/* Desktop Sidebar */}
+          <NavigationDrawer />
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col h-full overflow-hidden relative">
-          <TopAppBar />
-          <main className="flex-1 overflow-y-auto pb-32 md:pb-0">
-            {children}
-          </main>
-        </div>
+          {/* Main Content */}
+          <div className="flex-1 flex flex-col h-full overflow-hidden relative">
+            <TopAppBar />
+            <main className="flex-1 overflow-y-auto pb-32 md:pb-0">
+              {children}
+            </main>
+          </div>
 
-        {/* Mobile Bottom Nav */}
-        <BottomNavBar />
+          {/* Mobile Bottom Nav */}
+          <BottomNavBar />
+        </AuthProvider>
       </body>
     </html>
   );
