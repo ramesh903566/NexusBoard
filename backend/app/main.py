@@ -5,15 +5,12 @@ from app.api.v1 import dashboard, social, career
 from app.api.routers import auth
 
 from contextlib import asynccontextmanager
-from app.scheduler.engine import start_scheduler, stop_scheduler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
-    start_scheduler()
+    # Phase 2 architecture utilizes external Celery Beat heartbeat daemon
+    # rather than inline APScheduler to prevent thread blocking
     yield
-    # Shutdown
-    stop_scheduler()
 
 app = FastAPI(
     title=settings.PROJECT_NAME,

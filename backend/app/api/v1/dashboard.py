@@ -7,6 +7,7 @@ from app.config.database import get_db
 from app.models.metrics import NormalizedMetric, DailyAggregate
 from app.core.security import TokenPayload
 from app.api.dependencies import get_current_user_token
+from app.core.cache import get_cached_dashboard, set_cached_dashboard
 
 router = APIRouter()
 
@@ -18,7 +19,12 @@ async def get_overview_data(
 ):
     """
     Returns the Unified Score Matrix data. Reads from DailyAggregate.
+    Implements Phase 4: Cache-First Render
     """
+    cached = await get_cached_dashboard("overview")
+    if cached:
+        return cached
+
     # Attempt to query real data for the last 7 days
     stmt = select(DailyAggregate).order_by(desc(DailyAggregate.log_date)).limit(4)
     result = await db.execute(stmt)
@@ -26,7 +32,7 @@ async def get_overview_data(
     
     if not aggregates:
         # Fallback to dummy data if DB is empty
-        return {
+        dummy_data = {
             "score": 84.2,
             "chartData": [
                 { "subject": 'Coding', "A": 88, "fullMark": 100 },
@@ -36,9 +42,13 @@ async def get_overview_data(
             ],
             "status": "synced"
         }
+        await set_cached_dashboard("overview", dummy_data)
+        return dummy_data
         
     # If we had real data, we'd map it here...
-    return {"score": 0, "chartData": [], "status": "synced"}
+    real_data = {"score": 0, "chartData": [], "status": "synced"}
+    await set_cached_dashboard("overview", real_data)
+    return real_data
 
 
 @router.get("/productivity")
