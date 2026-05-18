@@ -7,12 +7,34 @@ export default function AuthPage() {
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSimulatedLogin = (isNewUser: boolean) => {
+  const handleSimulatedLogin = async (isNewUser: boolean) => {
     setIsLoading(true);
-    // Simulate an API call
-    setTimeout(() => {
-      login("mock_jwt_token_12345", isNewUser);
-    }, 800);
+    try {
+      // Create x-www-form-urlencoded payload as required by OAuth2PasswordRequestForm
+      const formData = new URLSearchParams();
+      formData.append('username', isNewUser ? 'newuser' : 'existinguser');
+      formData.append('password', 'dummy_password'); // Simulated
+
+      const res = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData.toString()
+      });
+
+      if (!res.ok) {
+        throw new Error(`Login failed: ${res.status}`);
+      }
+
+      const data = await res.json();
+      login(data.access_token, data.is_new_user);
+    } catch (error) {
+      console.error("Authentication error:", error);
+      alert("Authentication failed.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

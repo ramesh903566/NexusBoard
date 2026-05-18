@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config.settings import settings
 from app.api.v1 import dashboard, social, career
+from app.api.routers import auth
 
 from contextlib import asynccontextmanager
 from app.scheduler.engine import start_scheduler, stop_scheduler
@@ -31,6 +32,7 @@ app.add_middleware(
 )
 
 # Include routers
+app.include_router(auth.router, prefix=f"{settings.API_V1_STR}/auth", tags=["auth"])
 app.include_router(dashboard.router, prefix=f"{settings.API_V1_STR}/dashboard", tags=["dashboard"])
 app.include_router(social.router, prefix=f"{settings.API_V1_STR}/social", tags=["social"])
 app.include_router(career.router, prefix=f"{settings.API_V1_STR}/career", tags=["career"])
