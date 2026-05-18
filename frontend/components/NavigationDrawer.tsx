@@ -30,7 +30,7 @@ export function NavigationDrawer() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex flex-col h-full md:w-20 lg:w-80 rounded-r-lg border-r border-stroke-glass shadow-2xl bg-surface-container-low py-8 gap-[var(--spacing-grid-unit)] z-40 shrink-0 transition-all duration-300">
+    <aside className="hidden md:flex flex-col h-full md:w-20 lg:w-80 border-r border-stroke-glass shadow-[16px_0_40px_rgba(0,0,0,0.5)] bg-[rgba(20,24,34,0.45)] backdrop-blur-[40px] py-8 gap-[var(--spacing-grid-unit)] z-40 shrink-0 transition-all duration-300">
       {/* Profile Header */}
       <div className="px-4 lg:px-6 mb-8 flex items-center justify-center lg:justify-start gap-4">
         <div className="w-12 h-12 rounded-full border border-stroke-glass overflow-hidden shrink-0 relative bg-surface-container flex items-center justify-center">

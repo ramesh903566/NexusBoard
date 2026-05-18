@@ -2,7 +2,7 @@
 
 export function TopAppBar() {
   return (
-    <header className="flex justify-between items-center w-full px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] py-4 border-b border-stroke-glass bg-background/80 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] sticky top-0 z-40">
+    <header className="flex justify-between items-center w-full px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] py-4 border-b border-stroke-glass bg-[rgba(20,24,34,0.45)] backdrop-blur-[40px] shadow-[0_16px_40px_rgba(0,0,0,0.5)] sticky top-0 z-40">
       <div className="flex items-center gap-3">
         <span
           className="material-symbols-outlined text-primary text-[28px]"

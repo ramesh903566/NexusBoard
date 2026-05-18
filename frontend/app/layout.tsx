@@ -40,7 +40,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-background text-on-surface font-sans antialiased h-screen overflow-hidden flex">
+      <body className="text-on-surface font-sans antialiased h-screen overflow-hidden flex">
         <AuthProvider>
           {/* Desktop Sidebar */}
           <NavigationDrawer />

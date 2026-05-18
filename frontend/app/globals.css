@@ -72,7 +72,9 @@ html {
 }
 
 body {
-  background-color: var(--color-background);
+  /* Rich luxury twilight gradient, simulating a high-end abstract ocean sunset */
+  background: radial-gradient(circle at 50% 0%, #302b3f 0%, #171822 40%, #0d0f14 100%);
+  background-attachment: fixed;
   color: var(--color-on-surface);
   font-family: var(--font-sans);
 }
@@ -84,26 +86,29 @@ body {
 
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-surface-container-high);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* ===== Bento Card ===== */
+/* ===== Bento Card (Luxury Glassmorphism) ===== */
 .bento-card {
-  background-color: var(--color-surface-card);
-  border: 1px solid var(--color-stroke-glass);
+  background: rgba(20, 24, 34, 0.45);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
   padding: 32px;
