@@ -3,10 +3,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config.settings import settings
 from app.api.v1 import dashboard, social, career
 
+from contextlib import asynccontextmanager
+from app.scheduler.engine import start_scheduler, stop_scheduler
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    start_scheduler()
+    yield
+    # Shutdown
+    stop_scheduler()
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json"
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    lifespan=lifespan
 )
 
 # Set up CORS for the Next.js frontend
